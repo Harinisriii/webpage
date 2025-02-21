@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List Calendar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold mb-4">To-Do List Calendar</h2>
+        
+        <div class="mb-4">
+            <input id="taskInput" type="text" placeholder="Enter task" class="border p-2 rounded w-full">
+            <input id="dateInput" type="date" class="border p-2 rounded w-full mt-2">
+            <button onclick="addTask()" class="bg-blue-500 text-white px-4 py-2 rounded mt-2">Add Task</button>
+        </div>
+        
+        <ul id="taskList" class="list-disc pl-5"></ul>
+    </div>
+
+    <script>
+        function addTask() {
+            const taskInput = document.getElementById("taskInput");
+            const dateInput = document.getElementById("dateInput");
+            const taskList = document.getElementById("taskList");
+            
+            if (taskInput.value === "" || dateInput.value === "") {
+                alert("Please enter a task and a date");
+                return;
+            }
+
+            const li = document.createElement("li");
+            li.className = "p-2 bg-gray-200 rounded mt-2 flex justify-between";
+            li.innerHTML = `<span>${taskInput.value} - ${dateInput.value}</span>
+                            <button onclick="removeTask(this)" class="text-red-500">X</button>`;
+            taskList.appendChild(li);
+            
+            taskInput.value = "";
+            dateInput.value = "";
+        }
+
+        function removeTask(button) {
+            button.parentElement.remove();
+        }
+    </script>
+</body>
+</html>
